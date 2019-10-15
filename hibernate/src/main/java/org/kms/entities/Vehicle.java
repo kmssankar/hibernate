@@ -63,6 +63,11 @@ public class Vehicle {
 	public void setMdldesc(String mdldesc) {
 		this.mdldesc = mdldesc;
 	}
-
-	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Vehicle [vin=" + vin + ", mdlcd=" + mdlcd + ", mdlyr=" + mdlyr + ", mdldesc=" + mdldesc + "]";
+	}
 }
