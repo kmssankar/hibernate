@@ -2,9 +2,14 @@ package org.kms.hibernate.impl;
 
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import javax.transaction.Transaction;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.kms.entities.Vehicle;
 import org.kms.hibernate.util.HibernateUtil;
 
@@ -31,6 +36,22 @@ public class VehicleImpl {
 		List<Vehicle> vehList = session.createQuery("FROM Vehicle s").list();
 		return vehList;
 		
+	}
+	
+	public void getallVehicleusingCriteria(int modelYear) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		//Create CriteriaBuilder instance
+		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+		
+		CriteriaQuery<Vehicle> vehicleCriteriaQuery = criteriaBuilder.createQuery(Vehicle.class);
+		
+		Root<Vehicle> vehicleroot = vehicleCriteriaQuery.from(Vehicle.class);
+		vehicleCriteriaQuery.select(vehicleroot).where(criteriaBuilder.equal(vehicleroot.get("mdlyr"),modelYear));
+		Query<Vehicle> vehicleQuery=session.createQuery(vehicleCriteriaQuery);
+		System.out.println("Criteria Query");
+		for(Vehicle vehicle : vehicleQuery.list()) {
+			System.out.println(vehicle);
+		}
 	}
 
 	public Vehicle getVehicle(String vin) {
