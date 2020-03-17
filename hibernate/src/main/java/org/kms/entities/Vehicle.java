@@ -15,6 +15,27 @@ public class Vehicle {
 	int mdlyr;
 	@Column(name="mdldesc")
 	String mdldesc;
+	
+	/**
+	 * 
+	 */
+	public Vehicle() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	/**
+	 * @param vin
+	 * @param mdlcd
+	 * @param mdlyr
+	 * @param mdldesc
+	 */
+	public Vehicle(String vin, int mdlcd, int mdlyr, String mdldesc) {
+		super();
+		this.vin = vin;
+		this.mdlcd = mdlcd;
+		this.mdlyr = mdlyr;
+		this.mdldesc = mdldesc;
+	}
 	/**
 	 * @return the vin
 	 */
