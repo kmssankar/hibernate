@@ -34,6 +34,7 @@ public class VehicleImpl {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		@SuppressWarnings("unchecked")
 		List<Vehicle> vehList = session.createQuery("FROM Vehicle s").list();
+		session.close();
 		return vehList;
 		
 	}
@@ -52,11 +53,14 @@ public class VehicleImpl {
 		for(Vehicle vehicle : vehicleQuery.list()) {
 			System.out.println(vehicle);
 		}
+		session.close();
 	}
 
 	public Vehicle getVehicle(String vin) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		return session.get(Vehicle.class, vin);
+		Vehicle vehicle =session.get(Vehicle.class, vin);
+		session.close();
+		return vehicle;
 	}
 
 }
